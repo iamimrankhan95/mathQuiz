@@ -65,11 +65,11 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
-            android:background="@android:color/holo_green_dark"
+            android:background="@android:color/holo_green_light"
             android:gravity="center"
+            android:onClick="checkResult"
             android:text="Text"
             android:textSize="80sp"
-            android:onClick="checkResult"
             android:textStyle="bold" />
 
         <TextView
@@ -79,11 +79,11 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
-            android:background="@color/colorAccent"
+            android:background="@android:color/holo_purple"
             android:gravity="center"
+            android:onClick="checkResult"
             android:text="Text"
             android:textSize="80sp"
-            android:onClick="checkResult"
             android:textStyle="bold" />
 
         <TextView
@@ -95,9 +95,9 @@
             android:layout_gravity="fill"
             android:background="@color/colorPrimary"
             android:gravity="center"
+            android:onClick="checkResult"
             android:text="Text"
             android:textSize="80sp"
-            android:onClick="checkResult"
             android:textStyle="bold" />
     </GridLayout>
 
