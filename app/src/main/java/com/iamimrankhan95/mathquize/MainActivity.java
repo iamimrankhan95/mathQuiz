@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView01;
     TextView textView10;
     TextView textView11;
+    TextView textViewHighScore;
     Button buttonPlayAgain;
     GridLayout gridLayoutOptions;
     TextView textViewGo;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         textViewQuestion.setVisibility(View.VISIBLE);
         textViewScore.setVisibility(View.VISIBLE);
         textViewFeedback.setVisibility(View.VISIBLE);
+        textViewHighScore.setVisibility(View.VISIBLE);
+        textViewHighScore.setText("High Score: "+this.highScore);
         textViewFeedback.setText(" ");
         result=generateQuestion();
         this.totalTime=10;
@@ -49,27 +52,30 @@ public class MainActivity extends AppCompatActivity {
         textViewFeedback.setVisibility(View.INVISIBLE);
         textViewGo.setVisibility(View.VISIBLE);
         buttonPlayAgain.setVisibility(View.INVISIBLE);
-        this.total=0;this.score=0;this.result=0;
+        textViewHighScore.setVisibility(View.INVISIBLE);
+        this.total=0;this.score=0;this.result=0;this.isFinished=false;
         textViewScore.setText("0/0");
         textViewFeedback.setText(" ");
     }
     public void checkResult(View view){
-
-        TextView textViewForCheck=(TextView)view;
-        int rstCheck=Integer.parseInt(textViewForCheck.getText().toString());
-        if(rstCheck==result){
-            score++;
-            textViewFeedback.setText("Correct!");
-            countDownTimer.cancel();
-            totalTime+=4;
-            startCountDown();
-        }else{
-            textViewFeedback.setText("Wrong!");
+        if(!isFinished){
+            TextView textViewForCheck=(TextView)view;
+            int rstCheck=Integer.parseInt(textViewForCheck.getText().toString());
+            if(rstCheck==result){
+                score++;
+                textViewFeedback.setText("Correct!");
+                countDownTimer.cancel();
+                totalTime+=4;
+                startCountDown();
+            }else{
+                textViewFeedback.setText("Wrong!");
+            }
+            total++;
+            updateTextEditorScore();
+            result=generateQuestion();
+            placeOptions();
         }
-        total++;
-        updateTextEditorScore();
-        result=generateQuestion();
-        placeOptions();
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
          textViewQuestion=findViewById(R.id.textViewQuestion); textViewQuestion.setVisibility(View.INVISIBLE);
          textViewScore=findViewById(R.id.textViewTotalScore); textViewScore.setVisibility(View.INVISIBLE);
          textViewFeedback=findViewById(R.id.textViewFeedback); textViewFeedback.setVisibility(View.INVISIBLE);
+         textViewHighScore=findViewById(R.id.textViewHighScore);textViewHighScore.setVisibility(View.INVISIBLE);
          textView00=findViewById(R.id.textView00);
          textView01=findViewById(R.id.textView01);
          textView10=findViewById(R.id.textView10);
@@ -146,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 highScore=score;
                 System.out.println("finished");
                 System.out.println("totalTime:"+ totalTime);
+                isFinished=true;
             }
         }.start();
     }
